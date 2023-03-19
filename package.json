@@ -2,7 +2,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon ."
+    "dev": "nodemon . --ignore saves.json"
   },
   "devDependencies": {
     "eslint": "^8.36.0",
@@ -11,6 +11,7 @@
     "prettier": "^2.8.4"
   },
   "dependencies": {
-    "boxen": "^7.0.2"
+    "chalk": "^5.2.0",
+    "yup": "^1.0.2"
   }
 }
