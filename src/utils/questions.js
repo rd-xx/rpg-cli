@@ -1,5 +1,6 @@
 import { createInterface } from "readline/promises"
 import { moveCursor } from "readline"
+import play from "../options/play.js"
 import {} from "./console.js"
 import * as yup from "yup"
 import chalk from "chalk"
@@ -52,13 +53,28 @@ const askOption = async (options) => {
   return option
 }
 
-export const askAndExecute = async (title, options, save, shouldLoop) => {
+export const askAndExecute = async (
+  title,
+  options,
+  save,
+  { shouldLoop = false, canBack = false } = {}
+) => {
   if (title) {
     printBox(title)
   }
 
   // We have to create a copy of the array so we don't mutate the original
   options = [...options]
+
+  if (canBack) {
+    options.push({
+      title: "Go back",
+      emoji: "🔙",
+      fn: async () => {
+        await play(save)
+      },
+    })
+  }
 
   // Inject the exit option
   options.push({
@@ -74,9 +90,9 @@ export const askAndExecute = async (title, options, save, shouldLoop) => {
   if (shouldLoop) {
     // eslint-disable-next-line no-constant-condition
     while (true) {
-      await option.fn(save)
+      await option.fn(save, option) // Inject option as second argument (used in shop.js)
     }
   } else {
-    await option.fn(save)
+    await option.fn(save, option)
   }
 }

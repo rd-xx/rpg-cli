@@ -47,12 +47,17 @@ export const printOptions = (options) => {
 export const printStats = (stats) => {
   console.log(chalk.underline("Stats:"))
   console.log(`       → Level: ${chalk.cyan(calculateLevel(stats.exp))}`)
-  console.log(`       → Health: ${chalk.green(stats.health)}`)
   console.log(
-    `       → Weapon: ${chalk.bold(stats.weapon.name)} (${chalk.redBright(
+    `       → Health: ${
+      stats.health <= 0 ? chalk.red("Dead") : chalk.green(stats.health)
+    }`
+  )
+  console.log(
+    `       → Weapon: ${chalk.bold(stats.weapon.name)} (${chalk.red(
       stats.weapon.damage
     )})`
   )
+  console.log(`       → Money: ${chalk.yellow("$" + stats.money)}`)
   console.log()
 }
 

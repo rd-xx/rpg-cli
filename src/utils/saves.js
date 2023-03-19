@@ -1,11 +1,11 @@
 import { stat, writeFile, readFile } from "fs/promises"
 import { throwThenExit } from "./console.js"
 import {
-  BASE_EXP,
   BASE_HEALTH,
   BASE_MONEY,
-  getShop,
   SAVES_FILE,
+  getShop,
+  BASE_EXP,
 } from "./constants.js"
 
 const writeSaves = async (saves) => {
@@ -46,6 +46,7 @@ export const getSave = async (saveIndex) => {
 export const createNewSave = async () => {
   const saves = await getSaves()
   const newSave = {
+    id: saves.length + 1,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     exp: BASE_EXP,
@@ -58,4 +59,16 @@ export const createNewSave = async () => {
   await writeSaves(saves)
 
   return newSave
+}
+
+export const updateSave = async (save) => {
+  const saves = await getSaves()
+  const saveIndex = saves.findIndex((s) => s.id === save.id)
+
+  if (saveIndex === -1) {
+    throwThenExit("Save not found")
+  }
+
+  saves[saveIndex] = save
+  await writeSaves(saves)
 }

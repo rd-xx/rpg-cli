@@ -12,22 +12,22 @@ export const BASE_MONEY = 0
 const weapons = [
   {
     name: "Fists",
-    damage: 10,
+    damage: 15,
     price: 0,
   },
   {
     name: "Sword",
-    damage: 20,
+    damage: 30,
     price: 100,
   },
   {
     name: "Axe",
-    damage: 30,
+    damage: 50,
     price: 300,
   },
   {
     name: "Mace",
-    damage: 40,
+    damage: 65,
     price: 500,
   },
 ]
@@ -35,7 +35,7 @@ const weapons = [
 const potions = [
   {
     name: "Health Potion",
-    health: 40,
+    health: BASE_HEALTH,
     price: 15,
   },
 ]
@@ -54,7 +54,7 @@ export const monsters = [
     name: "Orc",
     health: 200,
     damage: 20,
-    exp: 150,
+    exp: 200,
     maxLvl: 7,
   },
   {

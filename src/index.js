@@ -3,6 +3,7 @@ import { askAndExecute } from "./utils/questions.js"
 import { calculateLevel } from "./utils/exp.js"
 import fight from "./options/fight.js"
 import play from "./options/play.js"
+import shop from "./options/shop.js"
 
 const baseOptions = [
   {
@@ -37,7 +38,7 @@ export const gameOptions = [
   {
     title: "Shop",
     emoji: "🛒",
-    fn: async () => {},
+    fn: shop,
   },
 ]
 
